@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/styles.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/4b4afb3621.js" crossorigin="anonymous"></script>
+    <title>ejs templeting</title>
+</head>
+<body>
+
+    <div class="box" id="heading">
+        <h1><%=name%></h1>
+    </div>
+    
+    <div class="box">
+        
+        
+        <% newlists.forEach((newlist)=>{ %>
+           <div class="item">
+                <div class="subitem">
+                    <a href="/delete?id=<%= newlist.id %>" style="text-decoration: none;color: #A683E3; margin-left:10px;"><i class="fa-sharp fa-solid fa-eraser"></i></a>
+                    <p><%= newlist.task %></p>
+                </div>
+                <a href="/edit?id=<%= newlist.id %>" style="text-decoration: none;color: #A683E3; margin:10px;"><i class="fa-sharp fa-solid fa-pen"></i></a>
+
+           </div>
+        <%});%> 
+           
+
+        <form class="item" action="/" method="post">
+            <label for="todo">
+                <input type="text" name="task" id="todo" placeholder="New">
+            </label>
+            <button type="submit" name="button">+</button>
+        </form>
+    </div>
+
+</body>
+</html>
