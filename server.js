@@ -13,8 +13,7 @@ app.set('view engine', 'ejs');
 app.use(bodyparser.urlencoded({extended:true}));// parse the encoded url 
 app.use(express.static('public'));
 
-                                //connecting the database
-
+                                //connecting the database                             
 const connectDb= async()=>
 {
     try
@@ -27,6 +26,8 @@ const connectDb= async()=>
         console.log(error);
     }
 }
+
+const PORT= process.env.PORT || 3000;
 
 connectDb().then(()=>
 {
@@ -121,19 +122,6 @@ app.post('/', function(request, response)
 app.post('/update', async function(request, response)
 {
     const id=request.body.id;
-
-
-
-
-
-
-
-
-
-
-
-
-
     console.log(id);
         const TodoValue={
             $set:{task: request.body.task}
@@ -217,4 +205,3 @@ app.get('/edit', async function(req, res)
 
 
 // app.listen(8000);
-const PORT= process.env.PORT || 3000;
