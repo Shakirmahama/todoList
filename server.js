@@ -71,7 +71,7 @@ app.get("/todo/:value",  async function(req, res)
 
 async function finder() {
     try {
-      const listItems = await doc.find();
+      const listItems = await doc.findOne();
       lists = listItems;
     } catch (error) {
       console.error('Error fetching data from the database:', error);
