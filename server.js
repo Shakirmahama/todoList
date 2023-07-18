@@ -18,7 +18,7 @@ const connectDb= async()=>
 {
     try
     {
-        const con =await mongoose.connect('process.env.MONGO_URI');
+        const con =await mongoose.connect(process.env.MONGO_URI);
         console.log("connected: ${con.connection.host}");
     }
     catch(error)
@@ -27,14 +27,12 @@ const connectDb= async()=>
     }
 }
 
-const PORT= process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Use port 3000 as default if PORT environment variable is not set
 
-connectDb().then(()=>
-{
-    app.listen('PORT', ()=>
-    {
-        console.log('port on ${PORT}');
-    })
+connectDb().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}`);
+  });
 });
                                 //defining the schema
 const NewSchema= new mongoose.Schema
