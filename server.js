@@ -68,13 +68,15 @@ app.get("/todo/:value",  async function(req, res)
       }
 });
 
-async function finder()
-{
-    
-    const listItems=await doc.find();
-
-    lists=listItems;
-}
+async function finder() {
+    try {
+      const listItems = await doc.find();
+      lists = listItems;
+    } catch (error) {
+      console.error('Error fetching data from the database:', error);
+      throw error; // Rethrow the error to be caught by the calling function
+    }
+  }
 
 
                                 //inserting the value in the database
