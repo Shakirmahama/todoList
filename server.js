@@ -72,7 +72,7 @@ app.get("/todo/:value",  async function(req, res)
         res.render('index', {name: myday, newlists: lists });
       } catch (error) {
         console.error('Error fetching data from the database:', error);
-        res.send('Error fetching data from the database');
+        res.send('Error fetching data from the database',error);
       }
 });
 
