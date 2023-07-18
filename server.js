@@ -43,13 +43,21 @@ const NewSchema= new mongoose.Schema
 );
 
 
-                                //creating model or collection 
+let parameter;
 let doc;
 let lists;
-let parameter
-
 let myday=date.getdate();
 
+async function finder() {
+    try {
+        const listItems = await doc.find();
+      lists = listItems;
+      
+    } catch (error) {
+      console.error('Error fetching data from the database:', error);
+      throw error; // Rethrow the error to be caught by the calling function
+    }
+  }
 
                                 // rendering the ejs templet
 app.get("/todo/:value",  async function(req, res)
@@ -57,30 +65,17 @@ app.get("/todo/:value",  async function(req, res)
     parameter=_.lowerCase(req.params.value);
     console.log(parameter);
 
-    doc = new mongoose.model( parameter, NewSchema);
-
+    
+    doc = new mongoose.model(parameter, NewSchema);
     try {
-        const listItems = await doc.find();
-         lists = listItems;
-        // const value=await finder(); // Call finder() and wait for the result
-        console.log(value);
-        res.render('index', { name: myday, newlists: lists });
+        const value=await finder(); // Call finder() and wait for the result
+        res.render('index', {name: myday, newlists: lists });
       } catch (error) {
         console.error('Error fetching data from the database:', error);
         res.send('Error fetching data from the database');
       }
 });
 
-// async function finder() {
-//     try {
-//         const listItems = await doc.find();
-//       lists = listItems;
-      
-//     } catch (error) {
-//       console.error('Error fetching data from the database:', error);
-//       throw error; // Rethrow the error to be caught by the calling function
-//     }
-//   }
 
 
                                 //inserting the value in the database
@@ -89,7 +84,6 @@ app.post('/', function(request, response)
         const TodoValue={
             task: request.body.task
         }
-
 
     try
     {
