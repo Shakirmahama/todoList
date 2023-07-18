@@ -60,7 +60,9 @@ app.get("/todo/:value",  async function(req, res)
     doc = new mongoose.model( parameter, NewSchema);
 
     try {
-        const value=await finder(); // Call finder() and wait for the result
+        const listItems = await doc.find();
+         lists = listItems;
+        // const value=await finder(); // Call finder() and wait for the result
         console.log(value);
         res.render('index', { name: myday, newlists: lists });
       } catch (error) {
@@ -69,15 +71,16 @@ app.get("/todo/:value",  async function(req, res)
       }
 });
 
-async function finder() {
-    try {
-      const listItems = await doc.findOne();
-      lists = listItems;
-    } catch (error) {
-      console.error('Error fetching data from the database:', error);
-      throw error; // Rethrow the error to be caught by the calling function
-    }
-  }
+// async function finder() {
+//     try {
+//         const listItems = await doc.find();
+//       lists = listItems;
+      
+//     } catch (error) {
+//       console.error('Error fetching data from the database:', error);
+//       throw error; // Rethrow the error to be caught by the calling function
+//     }
+//   }
 
 
                                 //inserting the value in the database
