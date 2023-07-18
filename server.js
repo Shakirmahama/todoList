@@ -60,7 +60,8 @@ app.get("/todo/:value",  async function(req, res)
     doc = new mongoose.model( parameter, NewSchema);
 
     try {
-        await finder(); // Call finder() and wait for the result
+        const value=await finder(); // Call finder() and wait for the result
+        console.log(value);
         res.render('index', { name: myday, newlists: lists });
       } catch (error) {
         console.error('Error fetching data from the database:', error);
