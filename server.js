@@ -22,7 +22,7 @@ const connectDb= async()=>
     try
     {
         const con =await mongoose.connect(process.env.MONGO_URI);
-        console.log("connected: ${con.connection.host}");
+        console.log('connected: ${con.connection.host}');
     }
     catch(error)
     {
@@ -32,11 +32,7 @@ const connectDb= async()=>
 
 
 
-connectDb().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-  });
-});
+
                                 //defining the schema
 const NewSchema= new mongoose.Schema
 (
@@ -209,3 +205,8 @@ app.get('/edit', async function(req, res)
 
 
 // app.listen(8000);
+connectDb().then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
+    });
+  });
