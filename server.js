@@ -62,14 +62,14 @@ app.get("/todo/:value",  async function(req, res)
         res.render('index', {name: myday, newlists: lists });
       } catch (error) {
         console.error('Error fetching data from the database:', error);
-        res.send('Error fetching data from the database',error);
+        res.status(500).send('Error fetching data from the database: ' + error);
       }
 });
 
 async function finder() 
 {
     try {
-        const listItems = await doc.find();
+        const listItems = await doc.find().timeout(30000); ;
       lists = listItems;
       
     } catch (error) {
