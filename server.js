@@ -48,16 +48,7 @@ let doc;
 let lists;
 let myday=date.getdate();
 
-async function finder() {
-    try {
-        const listItems = await doc.find();
-      lists = listItems;
-      
-    } catch (error) {
-      console.error('Error fetching data from the database:', error);
-      throw error; // Rethrow the error to be caught by the calling function
-    }
-  }
+
 
                                 // rendering the ejs templet
 app.get("/todo/:value",  async function(req, res)
@@ -75,6 +66,18 @@ app.get("/todo/:value",  async function(req, res)
         res.send('Error fetching data from the database',error);
       }
 });
+
+async function finder() 
+{
+    try {
+        const listItems = await doc.find();
+      lists = listItems;
+      
+    } catch (error) {
+      console.error('Error fetching data from the database:');
+      throw error; // Rethrow the error to be caught by the calling function
+    }
+  }
 
 
 
