@@ -9,11 +9,14 @@ const date= require(__dirname + "/date.js");
 const _ = require('lodash');
 const app= express();
 
+const PORT = process.env.PORT || 3000; // Use port 3000 as default if PORT environment variable is not set
+
 app.set('view engine', 'ejs');
 app.use(bodyparser.urlencoded({extended:true}));// parse the encoded url 
 app.use(express.static('public'));
 
-                                //connecting the database                             
+                                //connecting the database   
+mongoose.set('strictQuery', false);                          
 const connectDb= async()=>
 {
     try
@@ -27,7 +30,7 @@ const connectDb= async()=>
     }
 }
 
-const PORT = process.env.PORT || 3000; // Use port 3000 as default if PORT environment variable is not set
+
 
 connectDb().then(() => {
   app.listen(PORT, () => {
