@@ -30,7 +30,11 @@ const connectDb= async()=>
     }
 }
 
-
+connectDb().then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
+    });
+  });
 
 
                                 //defining the schema
@@ -205,8 +209,3 @@ app.get('/edit', async function(req, res)
 
 
 // app.listen(8000);
-connectDb().then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server listening on port ${PORT}`);
-    });
-  });
